@@ -38,6 +38,18 @@ CREATE TABLE usuarios(
   fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE libros_usuarios(
+  libro_id INT UNSIGNED NOT NULL,
+  usuario_id INT UNSIGNED NOT NULL,
+
+  FOREIGN KEY (libro_id) REFERENCES libros(libro_id),
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id),
+  fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE libros ADD ventas INT UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE libros ADD stock INT UNSIGNED DEFAULT 10;
+
 INSERT INTO autores ( nombre, apellidos, seudonimo, fecha_nacimiento, genero, pais_origen)
 VALUES ('Stephen Edwin', 'King', 'Richard Bachman', '1947-09-27', 'M', 'USA'),
         ('Joanne', 'Rowling', 'J.K Rowling', '1947-09-27', 'F', 'Reino unido'),
@@ -117,6 +129,9 @@ VALUES  ('Brandon', 'Hernandez', 'brandonh', 'brandon@gmail.com'),
         ('Rodrigo', 'Cardoso', 'rodric', 'rodrigo@gmail.com'),
         ('Aria', 'Sánchez', 'asisa', 'aria@gmail..com'),
         ('Lorelai', 'Cardoso', 'lorel', 'lorelai@gamil.com');
+
+INSERT INTO libros_usuarios(libro_id, usuario_id)
+VALUES (1, 1), (2, 1), (3, 1), (55, 3), (55, 3), (55, 3);
 
 SELECT * FROM autores;
 SELECT * FROM libros;
